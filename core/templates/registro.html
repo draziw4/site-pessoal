@@ -1,0 +1,50 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
+
+    <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-3xl font-bold text-green-400 mb-6 text-center">Criar Conta</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-4">
+                <label class="block text-gray-300 mb-2">Usuário</label>
+                {{ form.username|add_class:"w-full p-3 rounded bg-gray-700 text-white" }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-300 mb-2">E-mail</label>
+                {{ form.email|add_class:"w-full p-3 rounded bg-gray-700 text-white" }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-300 mb-2">Senha</label>
+                {{ form.password|add_class:"w-full p-3 rounded bg-gray-700 text-white" }}
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-300 mb-2">Confirme a Senha</label>
+                {{ form.password_confirm|add_class:"w-full p-3 rounded bg-gray-700 text-white" }}
+            </div>
+
+            <button type="submit" class="w-full bg-green-500 text-black p-3 rounded-lg font-semibold hover:bg-green-600 transition">
+                Criar Conta
+            </button>
+        </form>
+
+        <p class="text-gray-300 mt-4 text-center">
+            Já tem uma conta? <a href="{% url 'login' %}" class="text-green-400 hover:text-green-300">Faça login</a>.
+        </p>
+    </div>
+
+</body>
+</html>

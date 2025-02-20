@@ -1,0 +1,128 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vlogs e Tutoriais</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-900 via-blue-800 to-black text-white">
+
+    <!-- Cabeçalho -->
+    <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 text-white px-6 py-6 shadow-xl">
+        <div class="container mx-auto flex flex-col md:flex-row justify-center items-center gap-4">
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 hover:scale-110 transition transform duration-300">
+            </a>
+            <!-- Navegação -->
+            <nav class="flex space-x-6">
+                <a href="{% url 'home' %}" class="text-blue-200 hover:text-blue-400 transition duration-300 hover:underline">HOME</a>
+                <a href="#vlogs" class="text-blue-200 hover:text-blue-400 transition duration-300 hover:underline">VLOGS</a>
+                <a href="#tutoriais" class="text-blue-200 hover:text-blue-400 transition duration-300 hover:underline">TUTORIAIS</a>
+            </nav>
+        </div>
+    </header>
+    
+
+    <!-- Seção Principal -->
+    <main class="container mx-auto px-6 py-12 text-center">
+        <h1 class="text-5xl font-extrabold text-blue-300 mb-6 animate-pulse">Vlogs e Tutoriais</h1>
+    </main>
+
+    <!-- Seção Meus Vlogs -->
+    <section id="vlogs" class="container mx-auto px-6 py-12">
+        <h2 class="text-4xl font-bold text-blue-300 text-center mb-6">Meus Vlogs</h2>
+        <div class="swiper-container vlogs-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="relative group">
+                        <video controls class="w-full rounded-xl shadow-xl transition transform hover:scale-105 duration-300">
+                            <source src="{% static 'videos/vlog1.mp4' %}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="relative group">
+                        <video controls class="w-full rounded-xl shadow-xl transition transform hover:scale-105 duration-300">
+                            <source src="{% static 'videos/vlog2.mp4' %}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="relative group">
+                        <video controls class="w-full rounded-xl shadow-xl transition transform hover:scale-105 duration-300">
+                            <source src="{% static 'videos/vlog3.mp4' %}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- Seção Vídeos Tutoriais -->
+    <section id="tutoriais" class="container mx-auto px-6 py-12">
+        <h2 class="text-4xl font-bold text-blue-300 text-center mb-6">Tutoriais</h2>
+        <div class="swiper-container tutoriais-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="relative group">
+                        <video controls class="w-full rounded-xl shadow-xl transition transform hover:scale-105 duration-300">
+                            <source src="{% static 'videos/tutorial1.mp4' %}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="relative group">
+                        <video controls class="w-full rounded-xl shadow-xl transition transform hover:scale-105 duration-300">
+                            <source src="{% static 'videos/tutorial2.mp4' %}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="relative group">
+                        <video controls class="w-full rounded-xl shadow-xl transition transform hover:scale-105 duration-300">
+                            <source src="{% static 'videos/tutorial3.mp4' %}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script>
+        function initializeSwiper(containerClass) {
+            return new Swiper(containerClass, {
+                loop: false,
+                slidesPerView: 1,
+                spaceBetween: 200,
+                pagination: { el: '.swiper-pagination', clickable: true },
+                navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+                observer: true,
+                observeParents: true,
+                on: {
+                    slideChange: function () {
+                        document.querySelectorAll(containerClass + ' video').forEach(video => {
+                            video.pause();
+                        });
+                    }
+                }
+            });
+        }
+
+        var vlogsSwiper = initializeSwiper('.vlogs-swiper');
+        var tutoriaisSwiper = initializeSwiper('.tutoriais-swiper');
+    </script>
+
+</body>
+</html>

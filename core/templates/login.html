@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-900 to-black flex justify-center items-center h-screen">
+
+    <div class="bg-gray-900 p-8 rounded-2xl shadow-xl w-96 border border-blue-500/50">
+        <h2 class="text-3xl font-extrabold text-center text-blue-400 mb-6">Bem-vindo de volta</h2>
+        
+        {% if messages %}
+            <div class="mb-4">
+                {% for message in messages %}
+                    <p class="text-red-400 text-center">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label class="block text-sm font-medium text-blue-300">Usuário</label>
+                <input type="text" name="username" class="w-full p-3 rounded-lg bg-gray-800 border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-blue-300">Senha</label>
+                <input type="password" name="password" class="w-full p-3 rounded-lg bg-gray-800 border border-blue-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all duration-300 shadow-md">
+                Entrar
+            </button>
+        </form>
+
+        <!-- Linha de separação -->
+        <div class="mt-6 flex items-center justify-between">
+            <div class="w-full border-t border-gray-700"></div>
+            <span class="px-3 text-sm text-gray-400">ou</span>
+            <div class="w-full border-t border-gray-700"></div>
+        </div>
+
+        <!-- Botão de voltar para Home -->
+        <div class="mt-4 text-center">
+            <a href="{% url 'home' %}" class="text-blue-400 hover:text-blue-300 transition-all duration-300">
+                ← Voltar para o Início
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

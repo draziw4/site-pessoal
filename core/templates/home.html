@@ -1,0 +1,203 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheffSmith Beats</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@1.5.3/dist/flowbite.min.css" rel="stylesheet" />
+
+    <style>
+        /* Aplicando a fonte Montserrat apenas nos elementos externos ao formulário */
+        header, .parallax-content, #producoes, footer {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-900 via-blue-800 to-black text-white">
+
+    <!-- Cabeçalho -->
+    <header class="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 text-white px-6 py-6 shadow-xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400 hover:scale-105 transition transform">
+                CheffSmith
+            </a>
+            
+            <!-- Menu de Navegação -->
+            <nav class="flex items-center space-x-6 text-lg font-medium py-2">
+                <a href="{% url 'home' %}" class="text-blue-200 hover:text-blue-400 transition duration-300">INÍCIO</a>
+                <a href="{% url 'vlog' %}" class="text-blue-200 hover:text-blue-400 transition duration-300">VLOGS</a>
+                <a href="#orcamentos" class="text-blue-200 hover:text-blue-400 transition duration-300">ORÇAMENTOS</a>
+                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="text-red-400 hover:text-red-300 transition duration-300">SAIR</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="text-blue-200 hover:text-blue-400 transition duration-300">ENTRAR</a>
+                    <a href="{% url 'registro' %}" class="text-blue-200 hover:text-blue-400 transition duration-300">REGISTRAR</a>
+                {% endif %}
+            </nav>                  
+        </div>
+    </header>
+
+    <!-- Seção de Introdução com efeito de paralaxe -->
+    <section class="parallax flex items-center justify-center text-center text-white relative" style="min-height: 100vh;">
+        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover">
+            <source src="{% static 'videos/fundo.MOV' %}" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+        <div class="bg-black bg-opacity-60 p-12 rounded-lg shadow-2xl parallax-content relative z-10">
+            <h1 class="text-6xl font-extrabold text-white animate__animated animate__fadeIn animate__delay-1s">
+                Bem-vindo ao Meu Universo
+            </h1>
+            <p class="text-xl text-gray-300 mb-6 mt-4 animate__animated animate__fadeIn animate__delay-2s">
+                Descubra batidas exclusivas, colaborações inovadoras e produções que transformam o seu som.
+                Mergulhe em um mundo onde criatividade e excelência musical se encontram.
+            </p>
+            <a href="#producoes" class="inline-block text-lg font-bold text-blue-300 hover:text-blue-400 transition duration-300 mt-6 px-8 py-3 border border-blue-300 rounded-full hover:bg-blue-300">
+                Ouça Agora
+            </a>
+        </div>
+    </section>
+
+<!-- Seção de Produções com efeito Parallax -->
+<section id="producoes" class="relative overflow-hidden">
+    <!-- Fundo parallax para a seção de produções -->
+    <div class="absolute inset-0 w-full h-full bg-fixed bg-center bg-cover opacity-50">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover">
+            <source src="{% static 'videos/fundo2.MOV' %}" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+    </div>
+
+    <div class="relative container mx-auto px-6 py-12 text-center">
+        <h2 class="text-4xl font-extrabold text-blue-400 mb-8">
+            Produções Exclusivas
+        </h2>
+        <div class="flex justify-center items-center">
+            <iframe style="border-radius:12px;box-shadow:0 4px 12px rgba(0, 0, 0, 0.2)" src="https://open.spotify.com/embed/artist/6A4lS9s8nXm3dQZNjBDe24?utm_source=generator&theme=0" 
+                width="50%" height="500" frameBorder="0" allowfullscreen="" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy">
+            </iframe>
+        </div>
+    </div>
+</section>
+
+<!-- Seção de Orçamentos com efeito Parallax -->
+<section id="orcamentos" class="relative overflow-hidden">
+    <!-- Fundo parallax para a seção de orçamentos -->
+    <!-- <div class="absolute inset-0 w-full h-full bg-fixed bg-center bg-cover opacity-50">
+        <video autoplay loop muted playsinline class="w-full h-full object-cover">
+            <source src="{% static 'videos/fundo3.MP4' %}" type="video/mp4">
+            Seu navegador não suporta vídeos.
+        </video>
+    </div> -->
+
+    <div class="relative container mx-auto px-6 py-16 bg-gray-900 text-white rounded-2xl shadow-2xl border border-blue-800/50 max-w-4xl">
+        <h2 class="text-3xl font-extrabold text-center text-blue-400 mb-6">Solicite Seu Orçamento</h2>
+        <p class="text-gray-400 mb-8 text-center">Preencha os campos abaixo e entraremos em contato para fornecer um orçamento personalizado.</p>
+    
+        <form method="POST" action="{% url 'home' %}" class="space-y-8">
+            {% csrf_token %}
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col">
+                    <label class="text-sm font-medium text-blue-300 mb-2">Nome Completo</label>
+                    {{ form.nome_completo|add_class:"bg-gray-800 border border-blue-700 text-white input-altura rounded-lg p-3" }}
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-sm font-medium text-blue-300 mb-2">Nome Artístico</label>
+                    {{ form.nome_artistico|add_class:"bg-gray-800 border border-blue-700 text-white input-altura rounded-lg p-3" }}
+                </div>
+            </div>
+    
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col">
+                    <label class="text-sm font-medium text-blue-300 mb-2">Cidade / Estado</label>
+                    {{ form.cidade_estado|add_class:"bg-gray-800 border border-blue-700 text-white input-altura rounded-lg p-3" }}
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-sm font-medium text-blue-300 mb-2">Email</label>
+                    {{ form.email|add_class:"bg-gray-800 border border-blue-700 text-white input-altura rounded-lg p-3" }}
+                </div>
+            </div>
+    
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col">
+                    <label class="text-sm font-medium text-blue-300 mb-2">Instagram</label>
+                    {{ form.instagram|add_class:"bg-gray-800 border border-blue-700 text-white input-altura rounded-lg p-3" }}
+                </div>
+                <div class="flex flex-col">
+                    <label class="text-sm font-medium text-blue-300 mb-2">WhatsApp</label>
+                    {{ form.whatsapp|add_class:"bg-gray-800 border border-blue-700 text-white input-altura rounded-lg p-3" }}
+                </div>
+            </div>
+    
+            <div class="flex flex-col">
+                <label class="text-sm font-medium text-blue-300 mb-2">Gênero Musical</label>
+                {{ form.genero_musical|add_class:"bg-gray-800 border border-blue-700 text-white input-altura rounded-lg p-3" }}
+            </div>
+    
+            <div class="flex flex-col">
+                <label class="text-sm font-medium text-blue-300 mb-2">Serviços Desejados:</label>
+                <div class="space-y-2">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="beat_exclusivo" name="beat_exclusivo" value="True" class="form-checkbox h-5 w-5 text-blue-400">
+                        <label for="beat_exclusivo" class="ml-2 text-gray-300">Beat Exclusivo</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="composicao" name="composicao" value="True" class="form-checkbox h-5 w-5 text-blue-400">
+                        <label for="composicao" class="ml-2 text-gray-300">Composição</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="captacao_voz" name="captacao_voz" value="True" class="form-checkbox h-5 w-5 text-blue-400">
+                        <label for="captacao_voz" class="ml-2 text-gray-300">Captação de Voz</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="mixagem_masterizacao" name="mixagem_masterizacao" value="True" class="form-checkbox h-5 w-5 text-blue-400">
+                        <label for="mixagem_masterizacao" class="ml-2 text-gray-300">Mixagem e Masterização</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="identidade_visual" name="identidade_visual" value="True" class="form-checkbox h-5 w-5 text-blue-400">
+                        <label for="identidade_visual" class="ml-2 text-gray-300">Identidade Visual</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col">
+                <label class="text-sm font-medium text-blue-300 mb-2">Mensagem</label>
+                {{ form.mensagem|add_class:"bg-gray-800 border border-blue-700 text-white input-altura rounded-lg p-3" }}
+            </div>
+    
+            <div class="text-center">
+                <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-all duration-300 shadow-md">
+                    Enviar Orçamento
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-300">&copy; 2025 CheffSmith. Todos os direitos reservados.</p>
+            <div class="mt-4 space-x-4">
+                <a href="#" class="text-gray-300 hover:text-blue-400 transition">Termos de Serviço</a>
+                <a href="#" class="text-gray-300 hover:text-blue-400 transition">Política de Privacidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/scroll.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@1.5.3/dist/flowbite.min.js"></script>
+
+</body>
+</html>

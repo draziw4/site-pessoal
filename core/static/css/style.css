@@ -1,0 +1,93 @@
+
+/* Estilizando as fontes e espaçamento */
+header, .parallax-content, #producoes, footer {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Adicionando sombra suave no cabeçalho */
+header {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Melhorando o visual dos vídeos de fundo */
+.parallax video {
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+/* Melhorando o design das seções */
+section {
+    padding-top: 80px; /* Adicionando espaçamento superior */
+}
+
+/* Estilizando o formulário e inputs */
+.input-altura {
+    height: 45px;
+}
+
+/* Botões e links */
+a, button {
+    transition: all 0.3s ease-in-out;
+}
+a:hover, button:hover {
+    transform: scale(1.05);
+}
+
+/* Ajustando a responsividade */
+.max-w-4xl {
+    max-width: 100%;
+}
+
+.parallax-content {
+    background-color: rgba(0, 0, 0, 0.6); /* Melhor contraste para o conteúdo */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+footer {
+    padding: 30px 0;
+}
+
+
+
+
+
+
+/* Efeito de paralaxe melhorado */
+.parallax {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.parallax video {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    min-height: 100%;
+    min-width: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+}
+
+.parallax-content {
+    z-index: 10;
+    position: relative;
+    padding: 40px;
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Seções de Produções e Orçamentos com transições mais fluidas */
+/* #producoes, #orcamentos {
+    transition: opacity 0.6s ease-in-out;
+    opacity: 0;
+}
+
+#producoes.visible, #orcamentos.visible {
+    opacity: 1;
+} */
